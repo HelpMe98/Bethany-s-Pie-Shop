@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./site.css" type="text/css">
+    <title>Order | Bethany's Pie Shop</title>
+    <style>
+        .input-group {
+            margin-bottom : 20px;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 2px;
+        }
+
+        @media only screen and (min-width: 768px){
+            article {
+                width : 350;
+            }
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input[type="reset"] {
+            background: transparent;
+            border: 0;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            border: 1px solid #999;
+            border-radius: 3px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside>
+            <img src="/images/logo.png" alt="Bethany's Pie Shop" >
+        </aside>
+        <article>
+            <h1>Order</h1>
+
+            <div class="pie">
+                <img src="">
+                <div class="columns">
+                    <div class="title"></div>
+                    <div class="price"></div>
+                </div>
+                <div class="desc"></div>
+            </div>
+
+            <form action="http://localhost:7071/api/post" method="post">
+                <input type="hidden" name="pie-order" id="pie-order">
+
+                <div class="input-group">
+                    <div><label for="first-name">Frist Name</label></div>
+                    <div><input type="text" class="first-name" id="first-name"></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="last-name">Last Name</label></div>
+                    <div><input type="text" class="last-name" id="last-name"></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="address">Address</label></div>
+                    <div><input type="text" class="address" id="address"></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="state">State</label></div>
+                    <div>
+                        <select name="state" id="state">
+                            <option value="" selected>[Select one]</option>
+                            <option value="TpHCM">TP HCM</option>
+                            <option value="HaNoi">Ha Noi</option>
+                            <option value="DanNang">Da Nang</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="postal-code">Postal Code</label></div>
+                    <div><input type="text" class="postal-code" id="postal-code"></div>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="comments">Comments</label></div>
+                    <div>
+                        <textarea 
+                            name="comments" 
+                            id="comments" 
+                            cols="30" 
+                            rows="10">
+                        </textarea>
+                    </div>
+                </div>
+
+                <input type="reset" value="Reset">
+                <input type="submit" value="Submit">
+            </form>
+        </article>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+<script>
+    window.addEventListener("DOMContentLoaded", function(e){
+        const order = localStorage.getItem("order");
+
+        if(order) {
+            const pieOrder = JSON.parse(order);
+
+            const pie = document.querySelector(".pie");
+            const orderInput = document.querySelector("#pie-order");
+            orderInput.value = order;
+
+            const title = pie.querySelector(".title");
+            const price = pie.querySelector(".price");
+            const desc = pie.querySelector(".desc");
+
+            title.innerText = pieOrder.title;
+            price.innerText = pieOrder.price;
+            desc.innerText = pieOrder.desc;
+
+            const img = pie.querySelector("img");
+            img.setAttribute("src", `./images/${pieOrder.id}.png`);
+            img.setAttribute("alt", pieOrder.title);
+        }
+    })
+</script>
+</html>

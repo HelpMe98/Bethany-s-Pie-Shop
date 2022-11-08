@@ -39,7 +39,7 @@
                     <div class="price">10$</div>
                 </div>
                 <div class="desc">A summer classic!</div>
-                <button type="submit" data-order="cherry-pie">Order</button>
+                <button data-order="cherry-pie">Order</button>
             </div>
            </section>
         </article>
@@ -54,4 +54,30 @@
         </nav>
     </footer>
 </body>
+<script>
+    // Begin 
+    window.addEventListener("DOMContentLoaded", function(e){
+        // find all button with data-order
+        const orderButtons = document.querySelectorAll("button[data-order]");
+        orderButtons.forEach(function(button){
+            button.addEventListener("click", function(e){
+                const button = e.currentTarget;
+                const container = button.parentNode;
+
+                const order = {
+                    id : button.getAttribute("data-order"),
+                    title : container.querySelector(".title").innerText,
+                    price : container.querySelector(".price").innerText,
+                    desc : container.querySelector(".desc").innerText
+                }
+
+                // localStorage not saves object
+                localStorage.setItem("order", JSON.stringify(order));
+
+                url = window.location.href.replace("pies.html", "order.html");
+                window.location.href = url;
+            })
+        })
+    });
+</script>
 </html>
