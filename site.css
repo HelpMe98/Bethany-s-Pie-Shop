@@ -49,6 +49,7 @@ body {
     padding-top: 3em;
     padding-bottom: 3em;
     min-height: 85%;
+    position: relative;
 }
 
 aside,
@@ -66,6 +67,15 @@ aside {
 
 .columns {
     display: flex;
+}
+
+footer {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #a493c0;
+    padding: 10px;
 }
 
 @media only screen and (min-width: 768px){
@@ -119,6 +129,3 @@ aside {
     color: #fff;
 }
 
-footer {
-    padding: 15px;
-}
